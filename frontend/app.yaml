@@ -1,0 +1,8 @@
+runtime: nodejs18 # Atau gunakan 'static_files' jika hanya HTML murni
+handlers:
+  - url: /(.*)
+    static_files: \1
+    upload: (.*)
+  - url: /
+    static_files: index.html
+    upload: index.html
