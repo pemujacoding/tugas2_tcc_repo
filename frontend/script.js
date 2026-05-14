@@ -1,4 +1,4 @@
-const API = "http://localhost:3000/notes";
+const API = "http://34.172.113.167:5000/notes";
 
 let selectedId = null;
 
