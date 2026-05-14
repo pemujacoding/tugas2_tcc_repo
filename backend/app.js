@@ -14,6 +14,10 @@ app.get("/", (req, res) => {
 app.use(cors());
 app.use(express.json());
 
+app.get("/", (req, res) => {
+  res.send("Hello World!");
+});
+
 const noteRoutes = require("./routes/noteRoutes");
 app.use("/notes", noteRoutes);
 
