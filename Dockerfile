@@ -4,7 +4,7 @@ FROM node:20
 WORKDIR /app
 
 # 1. Salin package file dulu (agar npm install bisa di-cache oleh Docker)
-COPY backend/package*.json ./
+COPY package*.json ./
 
 # 2. Install dependensi
 RUN npm install
