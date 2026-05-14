@@ -2,7 +2,6 @@ steps:
   # Membuat image dengan perintah "cloud build -t gcr.io/$PROJECT_ID/tcc-be-rest ."
   # Project ID akan secara otomatis terisi ketika melakukan deploy di project yg dipilih
   - name: "gcr.io/cloud-builders/docker"
-    dir: "tcc/tugas22"
     args: ["build", "-t", "gcr.io/$PROJECT_ID/tcc-be-rest", "."]
 
   # Meng-upload/push image yg telah dibuat ke Artifact Registry
