@@ -1,4 +1,4 @@
-runtime: python39 # Runtime paling stabil untuk static files
+runtime: nodejs20
 service: tcc-sarah
 
 handlers:
@@ -9,8 +9,9 @@ handlers:
   - url: /(.*)
     static_files: frontend/\1
     upload: frontend/(.*)
-
-# Opsional: biar hemat
+    
+# Tambahkan ini supaya hemat (untuk testing)
 automatic_scaling:
+  target_cpu_utilization: 0.65
   min_instances: 0
   max_instances: 1
