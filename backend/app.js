@@ -1,32 +1,37 @@
 const express = require("express");
 const cors = require("cors");
-const sequelize = require("./config/database");
+// Pastikan koneksi database tidak bikin crash kalau gagal
+const sequelize = require("./config/database"); 
 
 const app = express();
 
-const path = require("path");
-app.use(express.static(path.join(__dirname, "../frontend")));
-
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "../frontend/index.html"));
-});
-
+// 1. CORS harus di atas sebelum route
 app.use(cors());
 app.use(express.json());
 
+// 2. Satu saja route untuk "/"
 app.get("/", (req, res) => {
-  res.send("Hello World!");
+  res.send("Hello World! Backend is running.");
 });
 
 const noteRoutes = require("./routes/noteRoutes");
 app.use("/notes", noteRoutes);
 
-sequelize.sync().then(() => {
-  console.log("Database connected");
-});
-
+// 3. Database Sync & Listen
+// Tips: Gunakan '0.0.0.0' agar Cloud Run bisa akses
 const port = process.env.PORT || 5000;
 
-app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
-});
+sequelize.sync()
+  .then(() => {
+    console.log("Database connected");
+    app.listen(port, '0.0.0.0', () => {
+      console.log(`Server running on port ${port}`);
+    });
+  })
+  .catch(err => {
+    console.error("Gagal konek DB, tapi coba jalankan server...");
+    // Tetap jalankan server biar Cloud Run nggak dianggap gagal/timeout
+    app.listen(port, '0.0.0.0', () => {
+      console.log(`Server running on port ${port}`);
+    });
+  });
