@@ -3,8 +3,8 @@ service: tcc-sarah
 
 handlers:
   - url: /
-    static_files: frontend/pages/index.html
-    upload: frontend/pages/index.html
+    static_files: frontend/index.html
+    upload: frontend/index.html
 
   - url: /(.*)
     static_files: frontend/\1
