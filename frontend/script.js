@@ -1,4 +1,4 @@
-const API = "http://34.172.113.167:5000/notes";
+const API = "https://be-rest-226557433828.us-central1.run.app/";
 
 let selectedId = null;
 
